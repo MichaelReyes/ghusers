@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="item"
+            type="com.technologies.ghusers.core.data.entity.User" />
+    </data>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/layoutParent"
@@ -25,6 +31,7 @@
                 android:layout_width="@dimen/icon_medium"
                 android:layout_height="@dimen/icon_medium"
                 android:layout_marginStart="@dimen/margin_medium"
+                app:imageUrl="@{item.avatarUrl}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -37,23 +44,27 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginEnd="@dimen/margin_small"
-                android:layout_marginBottom="@dimen/margin_medium"
+                android:text="@{item.login}"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="@dimen/font_size_medium"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/itemUser_tvEmail"
                 app:layout_constraintEnd_toStartOf="@+id/itemUser_ivNotes"
                 app:layout_constraintStart_toEndOf="@id/itemUser_ivAvatar"
-                app:layout_constraintTop_toTopOf="@id/itemUser_ivAvatar"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="MichaelReyes" />
 
             <TextView
                 android:id="@+id/itemUser_tvEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
                 android:layout_marginEnd="@dimen/margin_small"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{item.url}"
                 android:textColor="@color/colorPrimaryText"
                 android:textSize="@dimen/font_size_small"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/itemUser_ivNotes"
                 app:layout_constraintStart_toStartOf="@+id/itemUser_tvUsername"
                 app:layout_constraintTop_toBottomOf="@id/itemUser_tvUsername"

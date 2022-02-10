@@ -53,29 +53,6 @@ abstract class BaseViewModel : ViewModel() {
             errorMessage.invoke(exception.localizedMessage)
     }
 
-    suspend fun <T> Resource<T>.handleResponse(
-        onError: (suspend (Resource<T>) -> Unit)? = null,
-        onLoading: (suspend (Resource<T>) -> Unit)? = null,
-        onSuccess: suspend (Resource<T>) -> Unit,
-    ) {
-        when (status) {
-            Status.SUCCESS -> {
-                setLoading(false)
-                onSuccess.invoke(this)
-            }
-            Status.ERROR -> {
-                setLoading(false)
-                setError(message ?: "")
-                onError?.invoke(this)
-            }
-            Status.LOADING -> {
-                setLoading(true)
-                onLoading?.invoke(this)
-            }
-        }
-    }
-
-
     override fun onCleared() {
         viewModelScope.coroutineContext.cancelChildren()
         super.onCleared()

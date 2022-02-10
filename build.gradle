@@ -11,8 +11,8 @@ buildscript {
         navigation_version = '2.3.5'
 
         application_id = 'com.technologies.ghusers'
-        compile_sdk = 31
-        target_sdk = 31
+        compile_sdk = 30
+        target_sdk = 30
         min_sdk = 23
 
         version_name = '1'
@@ -39,6 +39,8 @@ buildscript {
         room_version = '2.4.0-alpha04'
         rx_network_version = '3.0.8'
         rx_kotlin_version = "2.4.0"
+        ext.paging_version = '2.1.2'
+        ext.skeleton_layout_version = '2.1.0'
     }
 
     repositories {
