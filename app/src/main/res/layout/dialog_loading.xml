@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_round_rectangle_white">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="@dimen/icon_xx_large"
+        android:layout_height="@dimen/icon_xx_large"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_url="https://assets3.lottiefiles.com/private_files/lf30_z6Hw67.json" />
+
+</FrameLayout>
