@@ -1,4 +1,4 @@
-package com.technologies.ghusers.core.data
+package com.technologies.ghusers.core.data.network
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     companion object {

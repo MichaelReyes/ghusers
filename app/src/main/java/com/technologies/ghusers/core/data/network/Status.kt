@@ -1,4 +1,4 @@
-package com.technologies.ghusers.core.data
+package com.technologies.ghusers.core.data.network
 
 enum class Status {
     SUCCESS,
