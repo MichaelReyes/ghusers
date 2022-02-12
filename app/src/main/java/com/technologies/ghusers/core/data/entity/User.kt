@@ -2,6 +2,7 @@ package com.technologies.ghusers.core.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.technologies.ghusers.core.data.database.AppDatabase
@@ -70,5 +71,8 @@ data class User(
     @ColumnInfo(name = "following")
     val following: Int?,
     @ColumnInfo(name = "notes")
-    var notes: String?
-)
+    var notes: String?,
+) {
+    @Ignore
+    var identifier: Int = 0
+}

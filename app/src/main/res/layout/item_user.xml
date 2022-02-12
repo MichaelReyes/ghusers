@@ -32,6 +32,7 @@
                 android:layout_height="@dimen/icon_medium"
                 android:layout_marginStart="@dimen/margin_medium"
                 app:imageUrl="@{item.avatarUrl}"
+                app:invertImageColor="@{item.identifier % 4 == 0}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

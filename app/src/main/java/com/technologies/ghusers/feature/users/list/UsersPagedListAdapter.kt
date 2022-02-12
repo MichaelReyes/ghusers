@@ -39,6 +39,7 @@ class UsersPagedListAdapter constructor(
 
         internal fun bind(user: User) {
             binding?.apply {
+                user.identifier = absoluteAdapterPosition + 1
                 this.item = user
                 itemView.setOnClickListener { clickListener(user) }
                 executePendingBindings()
@@ -47,7 +48,7 @@ class UsersPagedListAdapter constructor(
     }
 
     companion object {
-        val diffUtil = object: DiffUtil.ItemCallback<User>(){
+        val diffUtil = object : DiffUtil.ItemCallback<User>() {
             override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem.id == newItem.id
             }
