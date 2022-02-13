@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.technologies.ghusers.feature.users.details.UserDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_small">
+
+        <View
+            android:id="@+id/userDetails_vDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDivider"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/userDetails_tvFollowers"
+            style="@style/StyleTextDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@{`Followers: ` + viewModel.user.followers}"
+            app:layout_constraintEnd_toEndOf="@+id/userDetails_guideline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userDetails_vDivider"
+            tools:text="Followers: 21" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/userDetails_guideline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".5" />
+
+        <TextView
+            android:id="@+id/userDetails_tvFollowing"
+            style="@style/StyleTextDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:text="@{`Following: ` + viewModel.user.following}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/userDetails_guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Following: 21" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/userDetails_clDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_regular"
+            android:background="@drawable/bg_round_rectangle_white_border_black"
+            android:padding="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@id/userDetails_tvFollowers">
+
+            <TextView
+                android:id="@+id/userDetails_tvName"
+                style="@style/StyleTextDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{`Name: ` + viewModel.user.name}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Name: John" />
+
+            <TextView
+                android:id="@+id/userDetails_tvCompany"
+                style="@style/StyleTextDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@{`Company: ` + viewModel.user.company}"
+                app:layout_constraintStart_toStartOf="@+id/userDetails_tvName"
+                app:layout_constraintTop_toBottomOf="@+id/userDetails_tvName"
+                tools:text="Company: Apple" />
+
+            <TextView
+                android:id="@+id/userDetails_tvBlog"
+                style="@style/StyleTextDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:text="@{`Blog: ` + viewModel.user.blog}"
+                app:layout_constraintStart_toStartOf="@+id/userDetails_tvCompany"
+                app:layout_constraintTop_toBottomOf="@+id/userDetails_tvCompany"
+                tools:text="Blog: www.apple.com" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/userDetails_tvNotesLabel"
+            style="@style/StyleTextSubHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/lbl_notes"
+            app:layout_constraintEnd_toEndOf="@+id/userDetails_clDetails"
+            app:layout_constraintStart_toStartOf="@+id/userDetails_clDetails"
+            app:layout_constraintTop_toBottomOf="@+id/userDetails_clDetails" />
+
+        <EditText
+            android:id="@+id/userDetails_etNotes"
+            style="@style/StyleInputTextArea"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:padding="@dimen/margin_small"
+            android:singleLine="true"
+            app:layout_constraintEnd_toEndOf="@+id/userDetails_tvNotesLabel"
+            app:layout_constraintStart_toStartOf="@+id/userDetails_tvNotesLabel"
+            app:layout_constraintTop_toBottomOf="@+id/userDetails_tvNotesLabel"
+            tools:ignore="Autofill,LabelFor" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/userDetails_bLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:background="@drawable/bg_button_action"
+            android:text="@string/action_save"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_size_regular"
+            app:layout_constraintEnd_toEndOf="@+id/userDetails_etNotes"
+            app:layout_constraintStart_toStartOf="@+id/userDetails_etNotes"
+            app:layout_constraintTop_toBottomOf="@+id/userDetails_etNotes"
+            tools:text="@string/action_save" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

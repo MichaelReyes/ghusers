@@ -15,4 +15,7 @@ interface UserDao : BaseDao<User> {
     @Query("SELECT * FROM $USERS LIMIT :limit OFFSET :offset")
     fun getUsers(limit: Int, offset: Int): List<User>
 
+    @Query("SELECT * FROM $USERS WHERE login = :login")
+    fun getUserByLogin(login: String): User
+
 }

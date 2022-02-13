@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.technologies.ghusers.feature.users.details.UserDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/userDetails_ivBanner"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:adjustViewBounds="false"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_banner"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/userDetails_ivAvatar"
+            android:layout_width="@dimen/icon_extra_large"
+            android:layout_height="@dimen/icon_extra_large"
+            android:layout_marginEnd="@dimen/margin_large"
+            app:imageUrl="@{viewModel.user.avatarUrl}"
+            app:invertImageColor="@{false}"
+            app:layout_constraintBottom_toBottomOf="@+id/userDetails_ivBanner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/userDetails_ivBanner"
+            tools:ignore="ContentDescription"
+            tools:src="@tools:sample/avatars" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/flDetails"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userDetails_ivBanner">
+
+            <include
+                layout="@layout/layout_user_details"
+                app:viewModel="@{viewModel}" />
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

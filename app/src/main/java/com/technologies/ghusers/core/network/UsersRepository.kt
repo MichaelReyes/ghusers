@@ -16,6 +16,7 @@ interface UsersRepository {
 
     fun getUsers(start: Int, size: Int): Flow<Resource<List<User>>>
     fun insertUsers(users: List<User>): Flow<Resource<List<User>>>
+    fun getUserDetails(userLogin: String): Flow<Resource<User>>
 
 
     @ExperimentalCoroutinesApi
@@ -60,6 +61,36 @@ interface UsersRepository {
                 userDao.insert(users)
                 emit(Resource.success(data = users))
             }.flowOn(Dispatchers.IO)
+        }
+
+        override fun getUserDetails(userLogin: String): Flow<Resource<User>> {
+            return channelFlow {
+                send(Resource.loading(data = null))
+                try {
+                    if (networkHandler.isConnected) {
+                        service.getUserDetails(userLogin).let {
+                            userDao.insert(it)
+                            send(Resource.success(data = it))
+                        }
+                    } else {
+                        send(
+                            Resource.success(data = userDao.getUserByLogin(userLogin))
+                        )
+                    }
+
+                } catch (exception: Exception) {
+                    if (BuildConfig.DEBUG) {
+                        exception.printStackTrace()
+                    }
+                    send(
+                        Resource.error(
+                            data = null,
+                            message = exception.message ?: "Error Occurred!"
+                        )
+                    )
+                }
+
+            }
         }
     }
 }

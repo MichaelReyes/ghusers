@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.technologies.ghusers.R
@@ -17,6 +19,7 @@ import com.technologies.ghusers.core.base.BaseFragment
 import com.technologies.ghusers.core.base.BaseViewModel
 import com.technologies.ghusers.core.extensions.observe
 import com.technologies.ghusers.databinding.FragmentUsersBinding
+import com.technologies.ghusers.feature.users.details.UserDetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
@@ -42,6 +45,15 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>() {
     private fun initViews() {
         adapter = UsersPagedListAdapter(UsersPagedListAdapter.diffUtil)
         binding.usersRvData.adapter = adapter
+
+        adapter.clickListener = {
+            findNavController().navigate(
+                R.id.action_navTo_userDetails,
+                bundleOf(
+                    UserDetailsFragment.ARGS_USER_LOGIN to it.login
+                )
+            )
+        }
 
         listSkeleton = binding.usersRvData.applySkeleton(R.layout.item_user, 5)
 
