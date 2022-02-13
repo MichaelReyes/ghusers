@@ -91,7 +91,7 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
     }
 
     fun showMessage(message: String, positive: Boolean, neutral: Boolean = false) {
-        val snackbar = Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT)
+        val snackbar = Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG)
 
         val sbView = snackbar.view
         when {

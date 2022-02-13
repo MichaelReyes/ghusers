@@ -124,6 +124,12 @@ dependencies {
     implementation "com.github.pwittchen:reactivenetwork-rx2:$rx_network_version"
     implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
 
+    //Paged list
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    //Skeleton layout
+    implementation "com.faltenreich:skeletonlayout:$skeleton_layout_version"
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
