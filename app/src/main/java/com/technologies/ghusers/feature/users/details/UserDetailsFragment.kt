@@ -6,25 +6,52 @@ import androidx.navigation.fragment.findNavController
 import com.technologies.ghusers.R
 import com.technologies.ghusers.core.base.BaseFragment
 import com.technologies.ghusers.core.base.BaseViewModel
+import com.technologies.ghusers.core.extensions.observe
 import com.technologies.ghusers.databinding.FragmentUserDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.FlowPreview
 
+@FlowPreview
 @AndroidEntryPoint
-class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
+class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>(), UserDetailsHandler {
 
     private val viewModel: UserDetailsViewModel by viewModels()
 
     override val layoutRes: Int
         get() = R.layout.fragment_user_details
 
+    override fun getViewModel(): BaseViewModel = viewModel
+
+    override fun onSaveNotes() {
+        viewModel.insertNotes()
+    }
+
     override fun onCreated(savedInstance: Bundle?) {
         initBinding()
+        initObservers()
         checkArgs()
+    }
+
+    private fun initObservers() {
+        viewModel.apply {
+            observe(formState) {
+                it?.let {
+                    if (it.onNotesSaved) {
+                        showMessage(
+                            message = "Notes saved successfully",
+                            positive = true
+                        )
+                        resetNotesSaved()
+                    }
+                }
+            }
+        }
     }
 
     private fun initBinding() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.handler = this
     }
 
     private fun checkArgs() {
@@ -37,8 +64,6 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
             }
         }
     }
-
-    override fun getViewModel(): BaseViewModel = viewModel
 
 
     companion object {

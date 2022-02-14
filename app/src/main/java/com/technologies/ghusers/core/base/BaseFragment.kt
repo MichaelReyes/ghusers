@@ -33,20 +33,14 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
     protected abstract fun onCreated(savedInstance: Bundle?)
 
-    private var previouslyInitialized = false
-
     protected abstract fun getViewModel(): BaseViewModel?
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        if(!::binding.isInitialized) {
-            binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
-        } else {
-            previouslyInitialized = true
-        }
+        binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
         baseView = binding.root
 
         return baseView
@@ -58,9 +52,7 @@ abstract class BaseFragment<V : ViewDataBinding> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(!previouslyInitialized) {
-            onCreated(savedInstanceState)
-        }
+        onCreated(savedInstanceState)
         initBaseObserver()
     }
 

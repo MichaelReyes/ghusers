@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="handler"
+            type="com.technologies.ghusers.feature.users.details.UserDetailsHandler" />
+
+        <variable
             name="viewModel"
             type="com.technologies.ghusers.feature.users.details.UserDetailsViewModel" />
     </data>
@@ -48,6 +52,7 @@
 
             <include
                 layout="@layout/layout_user_details"
+                app:handler="@{handler}"
                 app:viewModel="@{viewModel}" />
 
         </androidx.core.widget.NestedScrollView>

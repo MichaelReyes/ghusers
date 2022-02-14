@@ -2,6 +2,7 @@ package com.technologies.ghusers.core.di
 
 import android.content.Context
 import androidx.room.Room
+import com.technologies.ghusers.core.data.dao.NoteDao
 import com.technologies.ghusers.core.data.dao.UserDao
 import com.technologies.ghusers.core.data.database.AppDatabase
 import dagger.Module
@@ -27,5 +28,10 @@ class DatabaseModule {
     @Provides
     fun provideUserDataDao(appDataBase: AppDatabase): UserDao {
         return appDataBase.userDao()
+    }
+
+    @Provides
+    fun provideNotesDataDao(appDataBase: AppDatabase): NoteDao {
+        return appDataBase.noteDao()
     }
 }

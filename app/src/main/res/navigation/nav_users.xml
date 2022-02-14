@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_users" >
         <action
             android:id="@+id/action_navTo_userDetails"
-            app:destination="@id/userDetailsFragment" />
+            app:destination="@id/userDetailsFragment"
+            app:popUpTo="@id/usersFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/userDetailsFragment"

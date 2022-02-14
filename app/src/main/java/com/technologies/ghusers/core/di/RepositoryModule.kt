@@ -1,5 +1,6 @@
 package com.technologies.ghusers.core.di
 
+import com.technologies.ghusers.core.data.dao.NoteDao
 import com.technologies.ghusers.core.data.dao.UserDao
 import com.technologies.ghusers.core.network.UsersRepository
 import com.technologies.ghusers.core.network.UsersService
@@ -19,9 +20,10 @@ object RepositoryModule {
     fun provideUsersRepository(
         service: UsersService,
         userDao: UserDao,
+        noteDao: NoteDao,
         networkHandler: NetworkHandler
     ): UsersRepository {
-        return UsersRepository.UsersRepositoryImpl(service, userDao, networkHandler)
+        return UsersRepository.UsersRepositoryImpl(service, userDao, noteDao, networkHandler)
     }
 
 }

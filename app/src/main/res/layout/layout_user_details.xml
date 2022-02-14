@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="handler"
+            type="com.technologies.ghusers.feature.users.details.UserDetailsHandler" />
+
+        <variable
             name="viewModel"
             type="com.technologies.ghusers.feature.users.details.UserDetailsViewModel" />
     </data>
@@ -115,8 +119,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_small"
+            android:onTextChanged="@{(text,start,before,count) -> viewModel.onDataChange(text)}"
             android:padding="@dimen/margin_small"
             android:singleLine="true"
+            android:textColor="@color/colorPrimaryText"
+            android:text="@{viewModel.currentNotes.notes}"
             app:layout_constraintEnd_toEndOf="@+id/userDetails_tvNotesLabel"
             app:layout_constraintStart_toStartOf="@+id/userDetails_tvNotesLabel"
             app:layout_constraintTop_toBottomOf="@+id/userDetails_tvNotesLabel"
@@ -130,9 +137,11 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:layout_marginEnd="@dimen/margin_large"
             android:background="@drawable/bg_button_action"
+            android:onClick="@{() -> handler.onSaveNotes()}"
             android:text="@string/action_save"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_size_regular"
+            android:visibility="@{viewModel.formState.dataValid}"
             app:layout_constraintEnd_toEndOf="@+id/userDetails_etNotes"
             app:layout_constraintStart_toStartOf="@+id/userDetails_etNotes"
             app:layout_constraintTop_toBottomOf="@+id/userDetails_etNotes"
