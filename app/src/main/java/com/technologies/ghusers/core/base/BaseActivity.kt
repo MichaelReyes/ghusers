@@ -10,9 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.technologies.ghusers.R
+import com.technologies.ghusers.core.extensions.observe
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 /**
  * To act as a super class for all other activities.
@@ -28,6 +32,8 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
 
     protected lateinit var binding: V
 
+    protected abstract fun getViewModel(): BaseViewModel?
+
     private val loadingDialog: LoadingDialog by lazy(mode = LazyThreadSafetyMode.NONE) {
         LoadingDialog(this)
     }
@@ -39,6 +45,7 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, layoutRes)
 
         onCreated(savedInstanceState)
+        initBaseObserver()
     }
 
     protected abstract fun onCreated(instance: Bundle?)
@@ -122,5 +129,15 @@ abstract class BaseActivity<V : ViewDataBinding> : AppCompatActivity() {
         textValue.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
 
         snackbar.show()
+    }
+
+    private fun initBaseObserver() {
+        getViewModel()?.apply {
+            (application as? App)?.internetConnectionStream
+                ?.onEach {
+                    setHasInternetConnection(it)
+                }?.launchIn(lifecycleScope)
+        }
+
     }
 }
