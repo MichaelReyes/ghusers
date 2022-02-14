@@ -24,8 +24,14 @@
     <dimen name="icon_extra_large">96dp</dimen>
     <dimen name="icon_xx_large">144dp</dimen>
 
+    <dimen name="radius_small">5dp</dimen>
+    <dimen name="radius_medium">10dp</dimen>
+    <dimen name="radius_large">15dp</dimen>
+
     <dimen name="image_size_small">320dp</dimen>
 
     <dimen name="multipane_left_width">500dp</dimen>
+
+    <dimen name="collapsing_toolbar_height">200dp</dimen>
 
 </resources>

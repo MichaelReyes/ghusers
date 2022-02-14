@@ -75,4 +75,7 @@ data class User(
 ) {
     @Ignore
     var identifier: Int = 0
+
+    @Ignore
+    var hasNotes: Boolean = false
 }

@@ -19,4 +19,27 @@
     <style name="AppTheme.AppBarOverlay.Dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="StyleTextSubHeader">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/font_size_medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="StyleTextDetails">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/font_size_regular</item>
+    </style>
+
+    <style name="StyleInputTextArea">
+        <item name="android:background">@drawable/bg_white_border_gray</item>
+        <item name="android:gravity">top|start</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:lines">6</item>
+        <item name="android:overScrollMode">always</item>
+        <item name="android:scrollbarStyle">insideInset</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="background">@drawable/bg_white_border_gray</item>
+    </style>
 </resources>
