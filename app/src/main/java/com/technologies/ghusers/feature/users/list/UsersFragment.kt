@@ -7,8 +7,10 @@ import androidx.navigation.fragment.findNavController
 import com.faltenreich.skeletonlayout.Skeleton
 import com.faltenreich.skeletonlayout.applySkeleton
 import com.technologies.ghusers.R
+import com.technologies.ghusers.core.base.BaseActivity
 import com.technologies.ghusers.core.base.BaseFragment
 import com.technologies.ghusers.core.base.BaseViewModel
+import com.technologies.ghusers.core.data.entity.Note
 import com.technologies.ghusers.core.extensions.getNavigationResult
 import com.technologies.ghusers.core.extensions.observe
 import com.technologies.ghusers.databinding.FragmentUsersBinding
@@ -19,7 +21,7 @@ import okhttp3.internal.notifyAll
 
 @FlowPreview
 @AndroidEntryPoint
-class UsersFragment : BaseFragment<FragmentUsersBinding>() {
+class UsersFragment : BaseFragment<FragmentUsersBinding>(), UsersHandler {
 
     private val viewModel: UsersViewModel by viewModels()
 
@@ -30,6 +32,10 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>() {
     override val layoutRes: Int
         get() = R.layout.fragment_users
 
+    override fun onSearch() {
+        findNavController().navigate(R.id.action_navTo_search)
+    }
+
     override fun getViewModel(): BaseViewModel = viewModel
 
     override fun onCreated(savedInstance: Bundle?) {
@@ -39,10 +45,14 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>() {
 
     override fun onResume() {
         super.onResume()
-        getNavigationResult<Pair<Boolean, Int>>(UserDetailsFragment.ARGS_DATA_UPDATED)?.let {
+
+        (activity as? BaseActivity<*>)?.setToolbar(show = false)
+
+
+        getNavigationResult<Triple<Boolean, Int, Note?>>(UserDetailsFragment.ARGS_DATA_UPDATED)?.let {
             viewLifecycleOwner.observe(it) {
                 if (it?.first == true) {
-                    adapter.setHasNotes(it.second)
+                    adapter.setHasNotes(it.second, it.third)
                 }
             }
         }
@@ -68,11 +78,14 @@ class UsersFragment : BaseFragment<FragmentUsersBinding>() {
             binding.usersSrlData.isRefreshing = false
             viewModel.reload()
         }
+
+
     }
 
     private fun initObservers() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+        binding.handler = this
         viewModel.apply {
             getUsers()
             viewLifecycleOwner.observe(users) { adapter.submitList(it) }

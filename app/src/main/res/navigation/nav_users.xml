@@ -9,16 +9,28 @@
         android:id="@+id/usersFragment"
         android:name="com.technologies.ghusers.feature.users.list.UsersFragment"
         android:label="fragment_users"
-        tools:layout="@layout/fragment_users" >
+        tools:layout="@layout/fragment_users">
         <action
             android:id="@+id/action_navTo_userDetails"
             app:destination="@id/userDetailsFragment"
-            app:popUpTo="@id/usersFragment"
-            app:launchSingleTop="true" />
+            app:launchSingleTop="true"
+            app:popUpTo="@id/usersFragment" />
+        <action
+            android:id="@+id/action_navTo_search"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/userDetailsFragment"
         android:name="com.technologies.ghusers.feature.users.details.UserDetailsFragment"
         android:label="UserDetailsFragment"
         tools:layout="@layout/fragment_user_details" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.technologies.ghusers.feature.users.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_navSearchTo_userDetails"
+            app:destination="@id/userDetailsFragment" />
+    </fragment>
 </navigation>
