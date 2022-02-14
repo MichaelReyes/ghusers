@@ -7,4 +7,8 @@
     <string name="lbl_notes">Notes</string>
     <string name="error_missing_user_login">Missing user login!</string>
     <string name="error_no_internet_connection">You are not connected to the internet</string>
+    <string name="hint_search">Search</string>
+    <string name="lbl_search">Search</string>
+    <string name="lbl_user_details">User Details</string>
+    <string name="error_no_user_details">Can\'t find user details</string>
 </resources>

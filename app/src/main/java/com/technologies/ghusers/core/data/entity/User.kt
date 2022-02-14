@@ -77,5 +77,5 @@ data class User(
     var identifier: Int = 0
 
     @Ignore
-    var hasNotes: Boolean = false
+    var userNote: Note? = null
 }

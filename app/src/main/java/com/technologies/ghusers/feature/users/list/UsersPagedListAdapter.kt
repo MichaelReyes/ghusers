@@ -9,6 +9,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.technologies.ghusers.R
+import com.technologies.ghusers.core.data.entity.Note
 import com.technologies.ghusers.core.data.entity.User
 import com.technologies.ghusers.databinding.ItemUserBinding
 
@@ -33,8 +34,8 @@ class UsersPagedListAdapter constructor(
         }
     }
 
-    fun setHasNotes(position: Int) {
-        getItem(position)?.hasNotes = true
+    fun setHasNotes(position: Int, note: Note?) {
+        getItem(position)?.userNote = note
         notifyItemChanged(position)
     }
 

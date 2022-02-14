@@ -5,8 +5,10 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.technologies.ghusers.R
+import com.technologies.ghusers.core.base.BaseActivity
 import com.technologies.ghusers.core.base.BaseFragment
 import com.technologies.ghusers.core.base.BaseViewModel
+import com.technologies.ghusers.core.data.entity.Note
 import com.technologies.ghusers.core.extensions.observe
 import com.technologies.ghusers.core.extensions.setNavigationResult
 import com.technologies.ghusers.databinding.FragmentUserDetailsBinding
@@ -34,13 +36,20 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>(), UserDeta
 
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                setNavigationResult<Pair<Boolean, Int>>(
-                    result = isDataUpdated to positionInList,
+                setNavigationResult<Triple<Boolean, Int, Note?>>(
+                    result = Triple(isDataUpdated, positionInList, viewModel.currentNotes.value),
                     key = ARGS_DATA_UPDATED
                 )
                 findNavController().navigateUp()
             }
         })
+
+
+        (activity as? BaseActivity<*>)?.setToolbar(
+            show = true,
+            title = getString(R.string.lbl_user_details),
+            showBackButton = true
+        )
 
         initBinding()
         initObservers()
