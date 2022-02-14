@@ -1,6 +1,5 @@
 package com.technologies.ghusers.core.network
 
-import com.technologies.ghusers.BuildConfig
 import com.technologies.ghusers.core.data.dao.NoteDao
 import com.technologies.ghusers.core.data.dao.UserDao
 import com.technologies.ghusers.core.data.entity.Note
@@ -8,11 +7,9 @@ import com.technologies.ghusers.core.data.entity.User
 import com.technologies.ghusers.core.data.network.Resource
 import com.technologies.ghusers.core.extensions.safeCall
 import com.technologies.ghusers.core.utils.NetworkHandler
-import io.reactivex.Completable
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
-import java.lang.Exception
 import javax.inject.Inject
 
 interface UsersRepository {

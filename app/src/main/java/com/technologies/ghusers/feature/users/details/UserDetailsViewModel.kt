@@ -3,7 +3,6 @@ package com.technologies.ghusers.feature.users.details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import com.technologies.ghusers.R
 import com.technologies.ghusers.core.base.BaseViewModel
 import com.technologies.ghusers.core.data.entity.Note
 import com.technologies.ghusers.core.data.entity.User
@@ -11,11 +10,8 @@ import com.technologies.ghusers.core.extensions.handleResponse
 import com.technologies.ghusers.core.extensions.updateFields
 import com.technologies.ghusers.core.network.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
@@ -81,43 +77,46 @@ class UserDetailsViewModel @Inject constructor(
     }
 
     fun getUserDetails(userLogin: String) {
-        usersRepository
-            .getUserDetails(userLogin)
-            .onEach { resource ->
-                resource.handleResponse(
-                    onSuccess = {
-                        withContext(Dispatchers.Main) {
-                            it.data?.let { pair ->
-                                _user.postValue(pair.first)
-                                pair.second?.let { notes ->
-                                    _currentNotes.value = notes
-                                }
+        runBlocking {
+            usersRepository
+                .getUserDetails(userLogin)
+        }.onEach { resource ->
+            resource.handleResponse(
+                onSuccess = {
+                    withContext(Dispatchers.Main) {
+                        it.data?.let { pair ->
+                            _user.postValue(pair.first)
+                            pair.second?.let { notes ->
+                                _currentNotes.value = notes
                             }
                         }
-                        setLoading(false)
-                    },
-                    onLoading = {
-                        setLoading(true)
-                    },
-                    onError = {
-                        it.message?.let { error ->
-                            setError(error)
-                        }
-                        setLoading(false)
                     }
-                )
-            }.launchIn(viewModelScope)
+                    setLoading(false)
+                },
+                onLoading = {
+                    setLoading(true)
+                },
+                onError = {
+                    it.message?.let { error ->
+                        setError(error)
+                    }
+                    setLoading(false)
+                }
+            )
+        }.launchIn(viewModelScope)
     }
 
 
     fun insertNotes() {
         _form.value?.let { form ->
-            usersRepository.insertNote(
-                Note(
-                    notes = form.notes ?: "",
-                    userId = _user.value?.id ?: 0
+            runBlocking {
+                usersRepository.insertNote(
+                    Note(
+                        notes = form.notes ?: "",
+                        userId = _user.value?.id ?: 0
+                    )
                 )
-            ).onEach { resource ->
+            }.onEach { resource ->
                 resource.handleResponse {
                     withContext(Dispatchers.Main) {
                         it.data?.let { note ->
