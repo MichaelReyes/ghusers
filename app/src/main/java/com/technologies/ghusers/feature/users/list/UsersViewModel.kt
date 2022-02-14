@@ -57,8 +57,5 @@ class UsersViewModel @Inject constructor(
 
     override fun onCleared() {
         super.onCleared()
-        if (::sourceFactory.isInitialized) {
-            sourceFactory.source.value?.clear()
-        }
     }
 }

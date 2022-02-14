@@ -17,7 +17,7 @@ class UsersPagedListAdapter constructor(
     @NonNull val diffCallback: DiffUtil.ItemCallback<User>
 ) : PagedListAdapter<User, RecyclerView.ViewHolder>(diffCallback) {
 
-    internal var clickListener: (User) -> Unit = { _ -> }
+    internal var clickListener: (User, Int) -> Unit = { _, _ -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = DataBindingUtil.inflate<ItemUserBinding>(
@@ -34,6 +34,11 @@ class UsersPagedListAdapter constructor(
         }
     }
 
+    fun setHasNotes(position: Int) {
+        getItem(position)?.hasNotes = true
+        notifyItemChanged(position)
+    }
+
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val binding: ItemUserBinding? = DataBindingUtil.bind(itemView)
@@ -42,7 +47,7 @@ class UsersPagedListAdapter constructor(
             binding?.apply {
                 user.identifier = absoluteAdapterPosition + 1
                 this.item = user
-                itemView.setOnClickListener { clickListener(user) }
+                itemView.setOnClickListener { clickListener(user, absoluteAdapterPosition) }
                 executePendingBindings()
             }
         }

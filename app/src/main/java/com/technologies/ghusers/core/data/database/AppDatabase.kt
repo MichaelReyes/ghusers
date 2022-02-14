@@ -14,7 +14,7 @@ import com.technologies.ghusers.core.data.entity.User
 abstract class AppDatabase : RoomDatabase() {
     companion object {
         const val DB_NAME = "ghusers.db"
-        const val VERSION = 1
+        const val VERSION = 3
         const val USERS = "TBL_USERS"
         const val NOTES = "TBL_NOTES"
     }
