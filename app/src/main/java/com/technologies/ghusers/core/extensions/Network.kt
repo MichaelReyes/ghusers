@@ -2,10 +2,8 @@ package com.technologies.ghusers.core.extensions
 
 import com.technologies.ghusers.BuildConfig
 import com.technologies.ghusers.core.data.network.Resource
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.ProducerScope
-import kotlinx.coroutines.withContext
 
 @ExperimentalCoroutinesApi
 suspend fun <T> ProducerScope<Resource<T>>.safeCall(

@@ -133,4 +133,11 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //Local testing
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "androidx.test.ext:junit:$junit_ext_version"
+    testImplementation "android.arch.core:core-testing:$arch_core_testing"
+    testImplementation 'app.cash.turbine:turbine:0.6.0'
 }

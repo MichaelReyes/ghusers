@@ -41,6 +41,11 @@ buildscript {
         rx_kotlin_version = "2.4.0"
         ext.paging_version = '2.1.2'
         ext.skeleton_layout_version = '2.1.0'
+
+        mockk_version = '1.10.2'
+        junit_version = '4.13.1'
+        junit_ext_version = '1.1.2'
+        arch_core_testing = '1.1.1'
     }
 
     repositories {

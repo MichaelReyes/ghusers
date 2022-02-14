@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import com.technologies.ghusers.core.data.database.AppDatabase.Companion.USERS
 import com.technologies.ghusers.core.data.entity.User
-import io.reactivex.Single
 
 @Dao
 interface UserDao : BaseDao<User> {
